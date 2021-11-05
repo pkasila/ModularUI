@@ -62,7 +62,11 @@ public struct ModularView: View {
             .listStyle(SidebarListStyle())
  
             // Initial content of the second column.
-            EmptyView()
+            if let view = registry.tabs.first(where: { $0.id == self.tabId }) {
+                view.render()
+            } else {
+                EmptyView()
+            }
  
             // Initial content for the third column.
             Text("Select a category of settings in the sidebar.")
