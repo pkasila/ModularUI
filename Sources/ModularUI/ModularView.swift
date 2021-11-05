@@ -21,15 +21,18 @@ public struct ModularView: View {
     #endif
 
     public var body: some View {
-        #if os(iOS)
-        if horizontalSizeClass == .compact {
-            tabbed
-        } else {
+        Group {
+            #if os(iOS)
+            if horizontalSizeClass == .compact {
+                tabbed
+            } else {
+                sidebar
+            }
+            #else
             sidebar
+            #endif
         }
-        #else
-        sidebar
-        #endif
+        .onAppear(perform: self.setUp)
     }
     
     private var tabbed: some View {
@@ -43,7 +46,6 @@ public struct ModularView: View {
                     .tag(tab.id)
             }
         }
-        .onAppear(perform: self.setUp)
     }
     
     private var sidebar: some View {
@@ -64,7 +66,6 @@ public struct ModularView: View {
             // Initial content for the third column.
             Text("Select a category of settings in the sidebar.")
         }
-        .onAppear(perform: self.setUp)
     }
     
     private func setUp() {
