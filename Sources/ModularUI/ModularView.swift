@@ -50,8 +50,10 @@ public struct ModularView: View {
         NavigationView {
             // The first column is the sidebar.
             List(registry.tabs, id: \.id) { tab in
-                NavigationLink(destination: tab.render()
-                                .navigationTitle(tab.title)) {
+                NavigationLink(tag: tab.id, selection: $tabId) {
+                    tab.render()
+                        .navigationTitle(tab.title)
+                } label: {
                     tab.label()
                 }
             }
@@ -71,6 +73,14 @@ public struct ModularView: View {
                 Registry.shared.add(tabModule: m.init())
             } else {
                 print("Failed to init \(module)")
+            }
+        }
+        
+        // Setup selected tab
+        
+        if self.tabId == nil {
+            if self.registry.tabs.count > 0 {
+                self.tabId = self.registry.tabs[0].id
             }
         }
     }

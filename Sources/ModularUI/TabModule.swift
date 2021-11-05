@@ -13,6 +13,7 @@ public protocol TabModule {
     
     typealias ID = String
     var id: ID { get }
+    var index: Int { get }
     
     var title: Text { get }
     

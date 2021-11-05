@@ -12,6 +12,7 @@ public class Registry: ObservableObject {
     
     public func add(tabModule: TabModule) {
         self.tabs.append(tabModule)
+        self.tabs.sort { $0.index < $1.index }
     }
     
     public static let shared = Registry()
