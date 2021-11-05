@@ -62,8 +62,9 @@ public struct ModularView: View {
             .listStyle(SidebarListStyle())
  
             // Initial content of the second column.
-            if let view = registry.tabs.first(where: { $0.id == self.tabId }) {
-                view.render()
+            if let tab = registry.tabs.first(where: { $0.id == self.tabId }) {
+                tab.render()
+                    .navigationTitle(tab.title)
             } else {
                 EmptyView()
             }
