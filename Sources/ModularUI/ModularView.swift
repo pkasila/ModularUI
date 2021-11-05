@@ -51,7 +51,7 @@ public struct ModularView: View {
     private var sidebar: some View {
         NavigationView {
             // The first column is the sidebar.
-            List(registry.tabs, id: \.id) { tab in
+            List(registry.tabs, id: \.id, selection: $tabId) { tab in
                 NavigationLink(tag: tab.id, selection: $tabId) {
                     tab.render()
                         .navigationTitle(tab.title)
