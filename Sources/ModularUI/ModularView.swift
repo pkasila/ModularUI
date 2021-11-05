@@ -27,6 +27,10 @@ public struct ModularView: View {
                     .tabItem { tab.label() }
                     .tag(tab.id)
             }
+        }.onAppear {
+            Runtime.classes(conformTo: TabModule.self).forEach { module in
+                Registry.shared.add(tabModule: module.init() as! TabModule)
+            }
         }
     }
 }
