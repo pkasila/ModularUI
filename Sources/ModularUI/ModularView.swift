@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Main view which is used to access all modules
 public struct ModularView: View {
     @ObservedObject private var registry: Registry
     

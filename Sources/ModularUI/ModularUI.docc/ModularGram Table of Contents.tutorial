@@ -1,0 +1,12 @@
+@Tutorials(name: "Building simple modular app with ModularUI") {
+    @Intro(title: "Go ModularUI") {
+        Create modular apps using ModularUI. Get started with ModularUI
+        by creating a simple app *ModularGram*
+    }
+    
+    @Chapter(name: "ModularUI Essentials") {
+        Create simple modules with the power of ModularUI
+        
+        @TutorialReference(tutorial: "doc:ModularUI-Essentials")
+    }
+}

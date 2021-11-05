@@ -7,13 +7,13 @@
 
 import Foundation
 
-public class Registry: ObservableObject {
+class Registry: ObservableObject {
     @Published private(set) var tabs = [TabModule]()
     
-    public func add(tabModule: TabModule) {
+    func add(tabModule: TabModule) {
         self.tabs.append(tabModule)
         self.tabs.sort { $0.index < $1.index }
     }
     
-    public static let shared = Registry()
+    static let shared = Registry()
 }

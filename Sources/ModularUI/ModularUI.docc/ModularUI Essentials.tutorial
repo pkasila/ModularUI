@@ -1,0 +1,27 @@
+@Tutorial(time: 10) {
+    @Intro(title: "Understanding structure of your modular app") {
+        New techniques bring new structure to your app. Jump right in
+        and make be ready to kick off.
+    }
+    
+    @Section(title: "Update's in App structure") {
+        @ContentAndMedia {
+            There are some changes we need to make in the main lifecycle structure
+            conforming protocol `App`
+        }
+        
+        @Steps {
+            @Step {
+                First of all you need to create your SwiftUI-lifecycle app in Xcode.
+                So, let's say you already have and ready to bring modularity to your app.
+            }
+            
+            @Step {
+                We replace our old `ContentView` with a new shiny <doc:ModularView> which
+                we need to import by importing ``ModularUI``.
+                
+                @Code(name: "ModularGramApp.swift", file: struct-new.swift, previousFile: struct-previous.swift)
+            }
+        }
+    }
+}
