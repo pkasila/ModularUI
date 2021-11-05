@@ -1,3 +1,4 @@
 # ModularUI
 
-A description of this package.
+ModularUI allows you to create your own powerful tabbed interfaces
+in convinient modular way.
