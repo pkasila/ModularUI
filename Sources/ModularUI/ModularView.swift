@@ -29,7 +29,11 @@ public struct ModularView: View {
             }
         }.onAppear {
             Runtime.classes(conformTo: TabModule.self).forEach { module in
-                Registry.shared.add(tabModule: module.init() as! TabModule)
+                if let m = (module as? TabModule.Type) {
+                    Registry.shared.add(tabModule: m.init())
+                } else {
+                    print("Failed to init \(module)")
+                }
             }
         }
     }

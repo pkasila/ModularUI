@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 public protocol TabModule {
+    init()
+    
     typealias ID = String
     var id: ID { get }
     
