@@ -59,6 +59,7 @@ public struct ModularView: View {
                     tab.label()
                 }
             }
+            .listStyle(SidebarListStyle())
  
             // Initial content of the second column.
             EmptyView()
