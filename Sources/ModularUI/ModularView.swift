@@ -28,7 +28,7 @@ public struct ModularView: View {
                     .tag(tab.id)
             }
         }.onAppear {
-            Runtime.classes(conformTo: TabModule.self).forEach { module in
+            Runtime.classes(conformTo: TabModule.Type.self).forEach { module in
                 if let m = (module as? TabModule.Type) {
                     Registry.shared.add(tabModule: m.init())
                 } else {
