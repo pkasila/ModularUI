@@ -6,7 +6,7 @@
     
     @Section(title: "Update's in App structure") {
         @ContentAndMedia {
-            There are some changes we need to make in the main lifecycle structure
+            There are some changes you need to make in the main lifecycle structure
             conforming protocol `App`
         }
         
@@ -17,10 +17,164 @@
             }
             
             @Step {
-                We replace our old `ContentView` with a new shiny <doc:ModularView> which
-                we need to import by importing ``ModularUI``.
+                You need to replace our old `ContentView` with a new shiny <doc:ModularView> which
+                you need to import by importing ``ModularUI``.
                 
-                @Code(name: "ModularGramApp.swift", file: struct-new.swift, previousFile: struct-previous.swift)
+                @Code(name: "ModularGramApp.swift", file: 01-essentials-struct-new.swift, previousFile: 01-essentials-struct-previous.swift)
+            }
+        }
+    }
+        
+    @Section(title: "Creating FeedTabModule") {
+        @ContentAndMedia {
+            Great, now we have our app ready to be used with ``ModularUI``, but
+            there is one question still: "How to create modules?"
+            
+            Let's declare a feed module, because as we decided earlier, `ModularGram`
+            is a social network app.
+        }
+        
+        @Steps {
+            @Step {
+                It's recommended to store your modules inside different frameworks
+                (dynamic libraries), so for `FeedTabModule`, it's recommended to
+                create `ModularGramFeed` framework and store the module in it, but
+                the choice is up to you.
+            }
+            
+            @Step {
+                Let's dive into declaring a module, so to declare a module you need
+                to create a class conforming <doc:TabModule> protocol. Let's get started
+                by declaring it and required initializer
+                
+                @Code(name: "FeedTabModule.swift", file: 01-essentials-feedmodule-01.swift)
+            }
+            
+            @Step {
+                Then we would like to add an identifier to our module, so the <doc:ModularUI>
+                would understand which module is which. Also, we need `index` property, so
+                it would be easier for <doc:ModularUI> to automatically arrange elements in
+                tab bar and sidebar.
+                
+                @Code(name: "FeedTabModule.swift", file: 01-essentials-feedmodule-02.swift, previousFile: 01-essentials-feedmodule-01.swift)
+            }
+            
+            @Step {
+                Next, it's time to import SwiftUI into our module, because you need
+                to declare <doc:TabModule>'s `title` property for the title which will
+                be shown in the navigation view, `render` function which should return
+                a view to be shown as the main module view, and `label` function which
+                should return label to be shown in tab bar or sidebar.
+                
+                You may have spotted that we have `FeedView` in our module, so this is
+                a simple SwiftUI's `View` which renders the feed.
+                
+                @Code(name: "FeedTabModule.swift", file: 01-essentials-feedmodule-03.swift, previousFile: 01-essentials-feedmodule-02.swift)
+            }
+            
+            @Step {
+                So, let's move to declaring our `FeedView`. Firstly, we need to
+                create a new SwiftUI View file.
+                
+                @Code(name: "FeedView.swift", file: 01-essentials-feedview-00.swift)
+            }
+            
+            @Step {
+                Then, obviously, we need to make some changes to our default SwiftUI View file.
+                
+                As you see it's a simple list, which iterates `items` array of `FeedItem`s,
+                containing `NavigationLink`s going to `PostView` and having as their label
+                a `FeedRow` view. Also, this list is declared with `InsetListStyle` and the
+                `FeedView` has the toolbar with the button which, ideally, should start a
+                sheet to create a new post, but we won't cover it in this tutorial, we will
+                just leave a `print` function here to make sure that it just works.
+                
+                @Code(name: "FeedView.swift", file: 01-essentials-feedview-01.swift, previousFile: 01-essentials-feedview-00.swift)
+            }
+            
+            @Step {
+                Next, we need to declare our structure for `FeedItem` to be used in `FeedView`.
+                
+                As you see, there is nothing special, just a structure with identifier,
+                message and username.
+                
+                @Code(name: "FeedItem.swift", file: 01-essentials-feeditem-00.swift)
+            }
+            
+            @Step {
+                Also, let's make static `sample` data array, so it would be easier for us to
+                experiment with it.
+                
+                @Code(name: "FeedItem.swift", file: 01-essentials-feeditem-01.swift, previousFile: 01-essentials-feeditem-00.swift)
+            }
+            
+            @Step {
+                Next, let's create a simple `FeedRow` view to represent `FeedItem` in
+                `FeedView`'s list.
+                
+                @Code(name: "FeedRow.swift", file: 01-essentials-feedrow.swift)
+            }
+            
+            @Step {
+                And the last thing to declare is the `PostView` which is the destination
+                view in the list of `NavigationLink`s in the `FeedView`.
+                
+                @Code(name: "PostView.swift", file: 01-essentials-postview.swift)
+            }
+        }
+    }
+        
+    @Section(title: "Creating MessagesTabModule") {
+        @ContentAndMedia {
+            Which feature should also be in our social network app?
+            
+            Of course messages, let's create a module to handle
+            messages
+        }
+        
+        @Steps {
+            @Step {
+                As with `FeedTabModule`, we recommend you to create a separate
+                framework for your `MessagesTabModule`, for example:
+                `ModularGramMessages`.
+            }
+            
+            @Step {
+                We basically declare the same `FeedTabModule`, but for messages.
+                
+                As you can spot, you need to change the identifier and index of
+                this module, so it won't mess around with `FeedTabModule`. Of course,
+                we replace `title` property and `render` and `label` functions to
+                return mess
+                
+                @Code(name: "MessagesTabModule.swift", file: 01-essentials-messagesmodule.swift, previousFile: 01-essentials-feedmodule-03.swift)
+            }
+            
+            @Step {
+                For `MessagesView`, it's pretty similar to `FeedView`, so there
+                those little changes that have been made
+                
+                @Code(name: "MessagesView.swift", file: 01-essentials-messagesview.swift, previousFile: 01-essentials-feedview-01.swift)
+            }
+            
+            @Step {
+                Let's declare the models which are used by `MessagesView`
+                
+                @Code(name: "MessagesModels.swift", file: 01-essentials-messagesmodels.swift)
+            }
+            
+            @Step {
+                The same situation with `ChatRow`, but we also add `RelativeDateTimeFormatter`
+                to it.
+                
+                @Code(name: "ChatRow.swift", file: 01-essentials-chatrow.swift, previousFile: 01-essentials-feedrow.swift)
+            }
+            
+            @Step {
+                Next, `ChatView` has a lot of common with `PostView`, just adding information
+                button in the toolbar
+                
+                @Code(name: "ChatView.swift", file: 01-essentials-chatview.swift, previousFile: 01-essentials-postview.swift)
             }
         }
     }
