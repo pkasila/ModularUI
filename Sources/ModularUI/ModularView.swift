@@ -69,9 +69,12 @@ public struct ModularView: View {
             } else {
                 EmptyView()
             }
- 
-            // Initial content for the third column.
-            Text("Select a category of settings in the sidebar.")
+            
+            if let thCol = registry.tabs.first(where: { $0.id == self.tabId })?.thirdColumnText {
+                thCol
+            } else {
+                EmptyView()
+            }
         }
     }
     

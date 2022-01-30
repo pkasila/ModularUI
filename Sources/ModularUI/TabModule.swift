@@ -23,6 +23,9 @@ public protocol TabModule {
     /// Title which will be displayed as navigation title
     var title: Text { get }
     
+    /// Text to be displayed in the third column
+    var thirdColumnText: Text? { get }
+    
     /// Called by ``ModularView`` to get the module's main view
     /// - Returns: the view to be rendered
     func render() -> AnyView
