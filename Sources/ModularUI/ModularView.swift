@@ -79,19 +79,21 @@ public struct ModularView: View {
     }
     
     private func setUp() {
-        Runtime.classes(conformTo: TabModule.Type.self).forEach { module in
-            if let m = (module as? TabModule.Type) {
-                Registry.shared.add(tabModule: m.init())
-            } else {
-                print("Failed to init \(module)")
+        if !self.registry.initiazlied {
+            Runtime.classes(conformTo: TabModule.Type.self).forEach { module in
+                if let m = (module as? TabModule.Type) {
+                    self.registry.add(tabModule: m.init())
+                } else {
+                    print("Failed to init \(module)")
+                }
             }
-        }
-        
-        // Setup selected tab
-        
-        if self.tabId == nil {
-            if self.registry.tabs.count > 0 {
-                self.tabId = self.registry.tabs[0].id
+            
+            // Setup selected tab
+            
+            if self.tabId == nil {
+                if self.registry.tabs.count > 0 {
+                    self.tabId = self.registry.tabs[0].id
+                }
             }
         }
     }
