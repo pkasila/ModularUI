@@ -80,7 +80,7 @@ public struct ModularView: View {
     
     private func setUp() {
         if !self.registry.initiazlied {
-            self.initiazlied = true
+            self.registry.initiazlied = true
             Runtime.classes(conformTo: TabModule.Type.self).forEach { module in
                 if let m = (module as? TabModule.Type) {
                     self.registry.add(tabModule: m.init())
