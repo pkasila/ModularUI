@@ -16,7 +16,7 @@ public struct ModularView: View {
         self.registry = Registry.shared
     }
     
-    @SceneStorage("ModularUI.tabId") private var tabId: String?
+    @AppStorage("ModularUI.tabId") private var tabId: String?
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
