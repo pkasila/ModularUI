@@ -88,14 +88,6 @@ public struct ModularView: View {
                     print("Failed to init \(module)")
                 }
             }
-            
-            // Setup selected tab
-            
-            if self.tabId == nil {
-                if self.registry.tabs.count > 0 {
-                    self.tabId = self.registry.tabs[0].id
-                }
-            }
         }
     }
 }
