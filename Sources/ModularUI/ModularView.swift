@@ -16,7 +16,7 @@ public struct ModularView: View {
         self.registry = Registry.shared
     }
     
-    @AppStorage("ModularUI.tabId") private var tabId: String?
+    @SceneStorage("ModularUI.tabId") private var tabId: String?
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -80,6 +80,7 @@ public struct ModularView: View {
     
     private func setUp() {
         if !self.registry.initiazlied {
+            self.initiazlied = true
             Runtime.classes(conformTo: TabModule.Type.self).forEach { module in
                 if let m = (module as? TabModule.Type) {
                     self.registry.add(tabModule: m.init())
